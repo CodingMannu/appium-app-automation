@@ -1,0 +1,6 @@
+CTRL + ALT + A: Open the application settings
+CTRL + ALT + D: Open the documentation
+CTRL + ALT + O: Handle import/remove package
+CTRL + ALT + L: Format the code
+SHIFT + ALT + - : Zoom out(left menu)
+SHIFT + ALT + = : Zoom in(left menu)

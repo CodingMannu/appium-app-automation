@@ -1,0 +1,182 @@
+
+astroyogi_app_automation/                      ← (FOLDER: Project root) - Root folder of the Maven project. Contains all source, configs, reports, etc
+│
+├── pom.xml                                                  ← (FILE)   - Maven configuration file with dependencies (Appium, Cucumber, TestNG, logging, reporting) and build plugins
+├── testng.xml                                               ← (FILE)   - Defines TestNG test suite, groups, parallel execution, listeners
+├── README.md                                                ← (FILE)   - Project documentation (setup instructions, usage)
+├── .gitignore                                               ← (FILE)   - Lists files and folders to ignore in Git (e.g. logs, reports)
+│
+├── src/                                                ← (FOLDER)      - All source code for utilities and tests
+│   ├── main/                                           ← (FOLDER)
+│   │   └── java/                                       ← (FOLDER)      - Core framework utilities and helpers.
+│   │       └── utils/                                  ← (PACKAGE)     - Contains reusable utilities used across framework
+│   │           ├── ConfigLoader.java                                   - Loads properties/config values from files like config.properties
+│   │           ├── LoggerUtil.java                                     - Central logging configuration using Log4j2
+│   │           ├── WaitUtils.java                                      - Encapsulates waits (explicit, fluent waits)
+│   │           ├── ScreenshotUtil.java                                 - Utility for taking screenshots on failures
+│   │           ├── DBUtils.java                                        - Database connectivity for fetching test data (if needed)
+│   │           ├── PlatformType.java                                   - Defines constants like ANDROID, IOS for platform detection
+│   │           ├── EmailSender.java
+│   │           ├── ExcelUtils.java
+│   │           ├── JsonUtils.java
+│   │           ├── MobileActions.java
+│   │           ├── TestDataPaths.java
+│   │           ├── ExtentManager.java
+│   │           │
+│   │           ├── data/                               ← (PACKAGE)     - Test data utilities
+│   │           │   ├── TestDataUtil.java                               - Reads test data from Excel or other files
+│   │           │   ├── JsonReader.java                                 - Reads JSON test data files
+│   │           │   └── ...
+│   │           │
+│   │           └── ...
+│   │
+│   │
+│   └── test/
+│       ├── java/                                      ← (FOLDER)        - Contains all test code
+│       │   ├── base/                                  ← (PACKAGE)       - Contains base classes for framework setup
+│       │   │   ├── AppiumServerHooks.java                               - Cucumber hooks for Appium server lifecycle
+│       │   │   ├── Hooks.java                                           - Cucumber hooks for setup/teardown
+│       │   │   ├── TestBase.java                                        - Base class for all tests, initializes driver, config, etc.
+│       │   │   └── ...
+│       │   │
+│       │   ├── config/                               ← (PACKAGE)       - Platform and environment config classes
+│       │   │   ├── CapabilityManager.java                              - Builds desired capabilities dynamically for drivers
+│       │   │   ├── Environment.java                                    - Stores environment-specific configs (e.g. dev, staging)
+│       │   │   └── ...
+│       │   │
+│       │   ├── driver/                              ← (PACKAGE)        - Manages driver instantiation
+│       │   │   ├── DriverFactory.java                                  - Factory pattern to create Appium driver objects
+│       │   │   ├── DriverManager.java                                  - Manages ThreadLocal driver objects for parallel execution
+│       │   │   ├── AppiumServerManager.java                             - Manages Appium server instance (start, stop)
+│       │   │   ├── AppiumServiceBuilderFactory.java                     - Factory for building Appium service
+│       │   │   └── ...
+│       │   │
+│       │   ├── apps/                                ← (PACKAGE)        - Groups code by apps (TTA, Pro)
+│       │   │   ├── tta/                             ← (PACKAGE)         - TTA App automation code. Contains Android and iOS packages
+│       │   │   │   ├── android/                     ← (PACKAGE)        - Android-specific code for TTA App
+│       │   │   │   │   ├── pages/                   ← (PACKAGE)        - Page Object classes for TTA Android screens
+│       │   │   │   │   │   ├── TTA_LoginPage.java                      - Page class representing TTA Android login screen (locators, actions)
+│       │   │   │   │   │   ├── TTA_HomePage.java                       - Page class representing TTA Android home screen
+│       │   │   │   │   │   └── ...
+│       │   │   │   │   │
+│       │   │   │   │   ├── stepdefinitions/        ← (PACKAGE)         - Cucumber step implementations for TTA Android
+│       │   │   │   │   │   ├── TTA_LoginSteps.java                     - Step definitions for TTA Android login.feature
+│       │   │   │   │   │   └── ...
+│       │   │   │   │   │
+│       │   │   │   │   └── runners/                ← (PACKAGE)         - Cucumber runner classes for TTA Android
+│       │   │   │   │       └── TTA_AndroidTestRunner.java              - Runs Cucumber tests for TTA Android
+│       │   │   │   │
+│       │   │   │   │
+│       │   │   │   └── ios/                       ← (PACKAGE)          - iOS-specific code for TTA App
+│       │   │   │       ├── pages/                 ← (PACKAGE)          - Page Object classes for TTA iOS screens
+│       │   │   │       │   ├── TTA_LoginPage.java                      - Page class for TTA iOS login screen
+│       │   │   │       │   └── ...
+│       │   │   │       │
+│       │   │   │       ├── stepdefinitions/      ← (PACKAGE)           - Step definitions for TTA iOS cucumber tests
+│       │   │   │       │   ├── TTA_LoginSteps.java                     - Step definitions for TTA iOS login.feature                                                                             ← (CLASS)
+│       │   │   │       │   └── ...
+│       │   │   │       │
+│       │   │   │       └── runners/              ← (PACKAGE)           - Cucumber runners for TTA iOS
+│       │   │   │           └── TTA_iOSTestRunner.java                  - Cucumber test runner for TTA iOS
+│       │   │   │
+│       │   │   │
+│       │   │   │
+│       │   │   └── pro/                          ← (PACKAGE)            - Pro App automation code. Contains Android-specific code
+│       │   │       ├── android/                  ← (PACKAGE)           - Android-specific code for Pro App
+│       │   │       │   ├── pages/                ← (PACKAGE)           - Page Object classes for Pro Android screens
+│       │   │       │   │   ├── Pro_LoginPage.java                      - Page class for Pro Android login screen
+│       │   │       │   │   ├── Pro_DashboardPage.java                  - Page class for Pro Android dashboard screen
+│       │   │       │   │   └── ...
+│       │   │       │   │
+│       │   │       │   ├── stepdefinitions/     ← (PACKAGE)            - Step definitions for Pro Android cucumber tests
+│       │   │       │   │   ├── Pro_LoginSteps.java                     - Step definitions for Pro Android login.feature
+│       │   │       │   │   └── ...
+│       │   │       │   │
+│       │   │       │   └── runners/             ← (PACKAGE)            - Cucumber runners for Pro Android
+│       │   │       │       └── Pro_AndroidTestRunner.java              - Cucumber test runner for Pro Android
+│       │   │       │
+│       │   │       │
+│       │   │       └── ios/(skip)            ← (FOLDER - Placeholder)  - Placeholder for future Pro iOS code (currently empty)
+│       │   │
+│       │   │
+│       │   └── listeners/                       ← (PACKAGE)            - TestNG listeners and reporting
+│       │       ├── RetryAnalyzer.java                                  - Handles retries for failed tests
+│       │       ├── TestListener.java                                   - Logs test start, success, failure events
+│       │       ├── ExtentReportListener.java                           - Generates ExtentReports or integrates Allure
+│       │       └── ...
+│       │
+│       │
+│       │
+│       └── resources/                           ← (FOLDER)             - All resource files used by the framework
+│           ├── features/                        ← (FOLDER)             - Stores cucumber feature files (Gherkin)
+│           │   ├── tta/                         ← (FOLDER)
+│           │   │   ├── android/                 ← (FOLDER)
+│           │   │   │   ├── login.feature                    ← (FILE)   - Gherkin scenarios for TTA Android login            -
+│           │   │   │   └── ...
+│           │   │   │
+│           │   │   └── ios/                     ← (FOLDER)
+│           │   │       ├── login.feature                   ← (FILE)    - Gherkin scenarios for TTA iOS login
+│           │   │       └── ...
+│           │   │
+│           │   └── pro/                         ← (FOLDER)
+│           │       └── android/                 ← (FOLDER)
+│           │           ├── login.feature                  ← (FILE)     - Gherkin scenarios for Pro Android login
+│           │           └── ...
+│           │
+│           ├── testdata/                        ← (FOLDER)             - JSON/Excel data files
+│           │  ├── pro                           ← (FOLDER)
+│           │  │   ├── loginData.json                   ← (FILE)    - Sample test data for Pro apps
+│           │  │   └── ...
+│           │  │
+│           │  └── tta                            ← (FOLDER)
+│           │      ├── loginData.json                   ← (FILE)    - Sample test data for TTA apps
+│           │      └── ...
+│           │
+│           ├── apps/                            ← (FOLDER)             - App files (APK, IPA) for automation
+│           │   ├── tta/                         ← (FOLDER)             - TTA App files
+│           │   │   ├── android/                 ← (FOLDER)             - Android APK files for TTA App
+│           │   │   │   ├── tta_app.apk                     ← (FILE)    - TTA Android APK file
+│           │   │   │   └── ...
+│           │   │   │
+│           │   │   └── ios/                     ← (FOLDER)             - iOS IPA files for TTA App
+│           │   │       ├── tta_app.ipa                     ← (FILE)    - TTA iOS IPA file
+│           │   │       └── ...
+│           │   │
+│           │   └── pro/                         ← (FOLDER)             - Pro App files
+│           │       ├── android/                 ← (FOLDER)             - Android APK files for Pro App
+│           │       │   ├── pro_app.apk                     ← (FILE)    - Pro Android APK file
+│           │       │   └── ...
+│           │       │
+│           │       └── ios/                     ← (FOLDER)             - iOS APK files for Pro App
+│           │           ├── pro_app.ipa                     ← (FILE)    - Pro ios APK file
+│           │           └── ...
+│           │
+│           ├── config/                          ← (FOLDER)             - Configuration files
+│           │   ├── config.properties                       ← (FILE)    - Environment, device, apps configs
+│           │   ├── extent-properties.xml                   ← (FILE)    - ExtentReports properties file
+│           │   ├── extent-config.xml                       ← (FILE)    - ExtentReports configuration file
+│           │   ├── log4j2.xml                              ← (FILE)    - Log4j2 logging configuration
+│           │   ├── allure.properties                       ← (FILE)    - Allure reporting configuration
+│           │   └── ...
+│           │
+│           └── appium/                          ← (FOLDER)             - Appium server and capabilities configuration
+│               ├── devices/                     ← (FOLDER)             - Appium server configuration files for devices
+│               │   ├── android-devices.json                ← (FILE)    - json file containing Android device capabilities
+│               │   └── ios-devices.json                    ← (FILE)    - json file containing iOS device capabilities
+│               │
+│               └── server-configs/             ← (FOLDER)              - Appium server configurations for different environments
+│                   ├── local.json                          ← (FILE)    - Desired capabilities for local devices
+│                   ├── staging.json                        ← (FILE)    - Desired capabilities for staging environment
+│                   ├── production.json                     ← (FILE)    - Desired capabilities for production environment
+│                   ├── remote.json                         ← (FILE)    - Desired capabilities for remote devices
+│                   └── ...
+│
+│
+└── test-output-result/                          ← (FOLDER)             - Test reports (HTML, Extent, Allure)
+    ├── appium-server.log                        ← (FILE)               - Appium server logs
+    ├── logs/                                    ← (FOLDER)             - Log files from test execution
+    ├── reports/                                 ← (FOLDER)             - TestNG HTML reports
+    │   ├── extent-report/                       ← (FOLDER)             - ExtentReports output
+    │   └── allure-report/                       ← (FOLDER)             - Allure report output
+    ├── screenshots/                             ← (FOLDER)             - Screenshots taken on test failures
+    └── ...

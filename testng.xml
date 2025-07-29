@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Astroyogi App Automation Suite" parallel="tests" thread-count="2">
+
+    <listeners>
+<!--        <listener class-name="listeners.EmailReportListener"/>-->
+    </listeners>
+
+    <test name="TTA Android Tests">
+        <classes>
+            <class name="apps.tta.android.runners.TTAAndroidTest"/>
+        </classes>
+    </test>
+</suite>

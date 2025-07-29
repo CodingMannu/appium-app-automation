@@ -1,0 +1,19 @@
+userName: manojkumar_vHbMUx
+accessKey: BwzKychFa4BwbFcWdS6P
+framework: java
+app: D:\Manoj kumar\AutomationProjects\astroyogi app automation\src\test\resources\apps\tta\android\app-debug.apk
+platforms:
+  - platformName: android
+    deviceName: Samsung Galaxy S22 Ultra
+    platformVersion: '12.0'
+  - platformName: android
+    deviceName: Google Pixel 7 Pro
+    platformVersion: '13.0'
+  - platformName: android
+    deviceName: OnePlus 9
+    platformVersion: '11.0'
+browserstackLocal: true
+buildName: bstack-demo
+projectName: astroyogi app automation
+debug: true
+networkLogs: true

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="MobileSuite" parallel="tests" thread-count="4">
+    <test name="Android_Device_1">
+        <parameter name="platform" value="android"/>
+        <classes>
+            <class name="apps.tta.android.runners.TTAAndroidTest"/>
+        </classes>
+    </test>
+
+    <test name="Android_Device_2">
+        <parameter name="platform" value="android"/>
+        <classes>
+            <class name="apps.tta.android.runners.TTAAndroidTest"/>
+        </classes>
+    </test>
+
+    <test name="iOS_Device_1">
+        <parameter name="platform" value="ios"/>
+        <classes>
+            <class name="apps.tta.ios.runners.TTAiOSTest"/>
+        </classes>
+    </test>
+
+    <test name="iOS_Device_2">
+        <parameter name="platform" value="ios"/>
+        <classes>
+            <class name="apps.tta.ios.runners.TTAiOSTest"/>
+        </classes>
+    </test>
+</suite>

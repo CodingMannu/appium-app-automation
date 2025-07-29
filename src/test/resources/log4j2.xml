@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <!-- Base path for test logs, dynamically set via context (app/platform) -->
+        <Property name="basePath">test-output-result/logs/${ctx:app}/${ctx:platform}</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <Routing name="ScenarioRouting">
+            <Routes pattern="$${ctx:logFilename}">
+                <Route>
+                    <RollingFile name="PerScenarioLog"
+                                 fileName="${basePath}/${ctx:logFilename}_${date:dd-MMM-yy}.log"
+                                 filePattern="${basePath}/${ctx:logFilename}_%d{dd-MMM-yy}-%i.log.gz">
+                        <PatternLayout pattern="%d{hh:mm:ss.SSS a} %-5level %logger{36} - %msg%n"/>
+                        <SizeBasedTriggeringPolicy size="1000KB"/>
+                    </RollingFile>
+                </Route>
+            </Routes>
+        </Routing>
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="Info">
+<!--            <AppenderRef ref="Routing"/>-->
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

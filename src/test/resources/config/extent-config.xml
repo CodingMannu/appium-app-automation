@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <theme>dark</theme> <!-- standard, dark-->
+        <encoding>UTF-8</encoding>
+        <protocol>http</protocol>
+
+        <documentTitle>Astroyogi Automation Report</documentTitle>
+        <reportName>Functional Testing Summary</reportName>
+
+        <testViewChartLocation>bottom</testViewChartLocation>
+
+        <scripts><![CDATA[
+			$(document).ready(function() {
+
+			});
+		]]></scripts>
+
+        <styles><![CDATA[
+
+		]]></styles>
+    </configuration>
+</extentreports>
